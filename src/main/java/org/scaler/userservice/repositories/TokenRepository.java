@@ -1,0 +1,10 @@
+package org.scaler.userservice.repositories;
+
+import org.scaler.userservice.models.Token;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.Optional;
+
+public interface TokenRepository extends JpaRepository<Token, Long> {
+    Optional<Token> findByValueAndDeleted(String token, Boolean isDeleted);
+}
