@@ -166,5 +166,3 @@ Participants in OAuth:
 We sometimes see a popup after clicking on the Google login button while signing up. This is the consent screen. It asks the user if they want to share their information with the application. Once the user agrees, the Auth server sends a token to the application, as well as the user's information (like email, name, etc.) for signup. Basically filling like an Authorization form.
 
 ![img_1.png](img_1.png)
-
-![img_2.png](img_2.png)
