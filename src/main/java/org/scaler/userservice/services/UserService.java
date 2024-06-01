@@ -1,6 +1,6 @@
 package org.scaler.userservice.services;
 
-import com.fasterxml.jackson.databind.ser.std.ToEmptyObjectSerializer;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.scaler.userservice.exceptions.IncorrectPasswordException;
 import org.scaler.userservice.exceptions.TokenExpiredException;
 import org.scaler.userservice.exceptions.UserAlreadyExistsException;
@@ -12,13 +12,10 @@ import org.scaler.userservice.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.apache.commons.lang3.RandomStringUtils;
 
 import java.time.Instant;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.util.Base64;
 import java.util.Date;
 import java.util.Optional;
 
@@ -60,6 +57,11 @@ public class UserService {
         if (!bCryptPasswordEncoder.matches(password, user.get().getHashedPassword())) {
             throw new IncorrectPasswordException("Incorrect Password");
         }
+        Token token = getTokenForLogin(user);
+        return tokenRepository.save(token);
+    }
+
+    private static Token getTokenForLogin(Optional<User> user) {
         Token token = new Token();
         token.setValue(RandomStringUtils.randomAlphanumeric(128));
         LocalDateTime localDateTime = LocalDateTime.now().plusDays(1);
@@ -67,7 +69,7 @@ public class UserService {
         token.setExpiryAt(expiryAt);
         token.setUser(user.get());
         token.setDeleted(false);
-        return tokenRepository.save(token);
+        return token;
     }
 
     public void logout(String token) {

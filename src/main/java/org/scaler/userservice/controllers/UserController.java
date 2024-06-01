@@ -5,14 +5,10 @@ import org.scaler.userservice.dtos.LoginRequestDto;
 import org.scaler.userservice.dtos.LogoutRequestDto;
 import org.scaler.userservice.dtos.SignUpRequestDto;
 import org.scaler.userservice.dtos.SignUpResponseDto;
-import org.scaler.userservice.exceptions.IncorrectPasswordException;
-import org.scaler.userservice.models.*;
-import org.scaler.userservice.repositories.UserRepository;
+import org.scaler.userservice.models.Token;
+import org.scaler.userservice.models.User;
 import org.scaler.userservice.services.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Random;
 
 @RestController
 @RequestMapping("/users")
