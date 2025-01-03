@@ -166,3 +166,11 @@ Participants in OAuth:
 We sometimes see a popup after clicking on the Google login button while signing up. This is the consent screen. It asks the user if they want to share their information with the application. Once the user agrees, the Auth server sends a token to the application, as well as the user's information (like email, name, etc.) for signup. Basically filling like an Authorization form.
 
 ![img_1.png](img_1.png)
+
+## Symmetric vs Asymmetric Encryption
+
+- **Symmetric Encryption**: The same key is used for both encryption and decryption. It is faster and simpler but requires the key to be shared between the sender and receiver. e.g., AES, DES, etc.
+- **Asymmetric Encryption**: Two keys are used - a public key for encryption and a private key for decryption. It is slower and more complex but provides better security. e.g., RSA, ECC, etc.
+  - Public key is used to encrypt the data and the private key is used to decrypt it.
+  - The private key is kept secret and is never shared.
+  - The public key can be shared with anyone who wants to send encrypted data to the owner of the private key.
