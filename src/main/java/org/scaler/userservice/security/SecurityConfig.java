@@ -82,7 +82,7 @@ public class SecurityConfig {
             throws Exception {
         http
                 .authorizeHttpRequests((authorize) -> authorize
-                        .anyRequest().authenticated() // Require all requests to be authenticated
+                        .anyRequest().permitAll() // Allow all requests without authentication
                 )
                 .csrf().disable()
                 .cors().disable()
