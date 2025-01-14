@@ -82,7 +82,7 @@ public class SecurityConfig {
             throws Exception {
         http
                 .authorizeHttpRequests((authorize) -> authorize
-                        .anyRequest().permitAll() // Allow all requests without authentication
+                        .anyRequest().authenticated() // Require all requests to be authenticated
                 )
                 .csrf().disable()
                 .cors().disable()
@@ -95,16 +95,16 @@ public class SecurityConfig {
     }
 
 
-    @Bean // This annotation indicates that a method produces a bean to be managed by the Spring container
-    public UserDetailsService userDetailsService() {
-        UserDetails userDetails = User.builder()
-                .username("user") // Set the username
-                .password(bCryptPasswordEncoder.encode("password")) // Set the password
-                .roles("USER") // Set the role
-                .build(); // Build the UserDetails instance
+    // @Bean // This annotation indicates that a method produces a bean to be managed by the Spring container
+    // public UserDetailsService userDetailsService() {
+    //     UserDetails userDetails = User.builder()
+    //             .username("user") // Set the username
+    //             .password(bCryptPasswordEncoder.encode("password")) // Set the password
+    //             .roles("USER") // Set the role
+    //             .build(); // Build the UserDetails instance
 
-        return new InMemoryUserDetailsManager(userDetails); // Return an in-memory user details manager with the created user
-    }
+    //     return new InMemoryUserDetailsManager(userDetails); // Return an in-memory user details manager with the created user
+    // }
 
 //    @Bean // This annotation indicates that a method produces a bean to be managed by the Spring container
 //    public RegisteredClientRepository registeredClientRepository() {

@@ -29,15 +29,19 @@ class UserServiceApplicationTests {
     @Commit
     public void registeredClientRepository() {
         RegisteredClient oidcClient = RegisteredClient.withId(UUID.randomUUID().toString()) // Generate a random UUID for the client ID
-                .clientId("oidc-client") // Set the client ID
-                .clientSecret("$2a$16$pG0CAcwDtOXAk3ans/tlVecWuEvLZ.LHOMsp36AUiDist/HAOiyGW") // Set the client secret
+                .clientId("oidc-client") // Like ProductService could be a client for Google, Google would give ProductService a client ID
+                .clientSecret("{noop}secret") // ProductService would be given a client secret by as well by Google
                 .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC) // Set the client authentication method
                 .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE) // Set the authorization grant type
                 .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN) // Set the refresh token grant type
-                .redirectUri("http://127.0.0.1:9000/login/oauth2/code/oidc-client") // Set the redirect URI
+                .authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS) // Set the client credentials grant type
+                .redirectUri("https://oauth.pstmn.io/v1/callback") // Set the redirect URI
                 .postLogoutRedirectUri("https://oauth.pstmn.io/v1/callback") // Set the post logout redirect URI
                 .scope(OidcScopes.OPENID) // Set the scope to "openid"
                 .scope(OidcScopes.PROFILE) // Set the scope to "profile"
+                .scope("ADMIN")
+                .scope("STUDENT")
+                .scope("MENTOR")
                 .clientSettings(ClientSettings.builder().requireAuthorizationConsent(true).build()) // Require authorization consent
                 .build(); // Build the RegisteredClient instance
 
