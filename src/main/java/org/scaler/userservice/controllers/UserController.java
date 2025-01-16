@@ -10,6 +10,8 @@ import org.scaler.userservice.models.User;
 import org.scaler.userservice.services.UserService;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/users")
 public class UserController {
@@ -46,5 +48,10 @@ public class UserController {
     @GetMapping("validateToken/{token}")
     public Token validateToken(@PathVariable("token") @NonNull String token) {
         return userService.validateToken(token);
+    }
+
+    @GetMapping()
+    public List<User> getAllUsers() {
+        return userService.getAllUsers();
     }
 }

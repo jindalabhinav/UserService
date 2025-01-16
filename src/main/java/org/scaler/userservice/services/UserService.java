@@ -17,6 +17,7 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -91,5 +92,13 @@ public class UserService {
             throw new TokenExpiredException("Token has expired");
 
         return foundToken.get();
+    }
+
+    public List<User> getAllUsers() {
+        List<User> users = userRepository.findAll();
+        if (users.isEmpty()) {
+            throw new UserNotFoundException("No users found");
+        }
+        return users;
     }
 }
